@@ -1,0 +1,11 @@
+{
+  "name": "snowflaker-app",
+  "version": "1.0.0",
+  "description": "An app for giving unique names to files and storing mappings to original names",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "os": "^0.1.1"
+  }
+}
