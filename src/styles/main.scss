@@ -23,6 +23,7 @@ body {
 
 #app-mount {
   height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
   padding: 25px 17px;
   background-color: rgba(38,48,127, 0.5); /* #26307F */
@@ -75,5 +76,93 @@ body {
       background-color: #525C78;
     }
   }
+}
+
+.title-container {
+  text-align: center;
+  height: 100%;
+  position: relative;
+  margin: 25px auto;
+  padding:25px;
+
+  .back-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 50px;
+    width: 200px;
+    border: 2px solid #5A6A7F;
+    background-color: #57617F;
+    border-radius: 4px;
+    font-size: 42px;
+    &:hover {
+      background-color: #5D6787;
+    }
+    &:active {
+      background-color: #525C78;
+    }
+  }
+
+  .partial-reset-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    height: 50px;
+    width: 200px;
+    border: 2px solid #5A6A7F;
+    background-color: #57617F;
+    border-radius: 4px;
+    font-size: 24px;
+    padding: 12.5px 0;
+    &:hover {
+      background-color: #5D6787;
+    }
+    &:active {
+      background-color: #525C78;
+    }
+  }
+
+  .undo-btn {
+    opacity: 0;
+    margin: 0 auto;
+    margin-top: 25px;
+    box-sizing: border-box;
+    height: 50px;
+    width: 200px;
+    border: 2px solid #5A6A7F;
+    background-color: #57617F;
+    border-radius: 4px;
+    font-size: 24px;
+    padding: 12.5px 0;
+    transition: opacity 0.5s ease-in;
+    &.show {
+      opacity: 1;
+    }
+    &:hover {
+      background-color: #5D6787;
+    }
+    &:active {
+      background-color: #525C78;
+    }
+  }
+
+  .drag-n-drop-title {
+    padding: 0;
+    margin: 50px 0;
+    transition: opacity 0.5s ease-in-out;
+    &.hide {
+      opacity: 0;
+    }
+  }
+}
+
+.output {
+  height: 300px;
+  outline: 2px solid #57617F;
+  background-color: black;
+  color: green;
+  overflow-y: scroll;
 }
 

@@ -1,10 +1,15 @@
 import * as Electron from 'electron';
 import * as path from 'path';
-import * as url from 'url';
+
+const isDev = process.env.NODE_ENV === 'development';
 // Module to control application life.
 const app: Electron.App = Electron.app
 // Module to create native browser window.
 const BrowserWindow = Electron.BrowserWindow
+
+const pageUrl = isDev
+ ? 'http://localhost:8080/main-window.html'
+ : `file://${__dirname}/main-window.html`;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,7 +19,7 @@ function createWindow (): void {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 700,
     transparent: true,
     titleBarStyle: 'hiddenInset',
     frame: false,
@@ -23,11 +28,7 @@ function createWindow (): void {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'main-window.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+  mainWindow.loadURL(pageUrl);
 
   if (mainWindow) {
     mainWindow.webContents.openDevTools({mode: 'detach'});
