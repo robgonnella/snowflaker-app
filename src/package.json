@@ -5,7 +5,5 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "os": "^0.1.1"
-  }
+  "dependencies": {}
 }

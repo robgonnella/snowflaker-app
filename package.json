@@ -1,12 +1,15 @@
 {
   "name": "Snowflaker-App",
+  "author": "Rob Gonnella",
   "version": "1.0.0",
   "description": "Simple app for generating unique file name and storing mappings",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "electron dist/app.js",
+    "start": "NODE_ENV=development electron dist/app.js",
     "build": "rm -rf dist/ && mkdir dist && cp -r static/* dist && webpack",
     "dev-server": "npm run build && webpack-dev-server --colors --content-base static",
-    "dev": "NODE_ENV=development npm start"
+    "dev": "NODE_ENV=development DEVSERVER=true npm start",
+    "pack": "electron-builder"
   },
   "devDependencies": {
     "@types/react": "^16.0.34",
@@ -31,9 +34,26 @@
     "style-loader": "^0.19.1",
     "ts-loader": "^3.3.0",
     "typescript": "^2.6.2",
-    "webpack": "^3.10.0"
-  },
-  "dependencies": {
+    "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
+  },
+  "build": {
+    "appId": "com.snowflaker.app",
+    "productName": "Snowflaker",
+    "directories": {
+      "output": "package",
+      "buildResources": "static/assets/icons"
+    },
+    "pkg": {
+      "scripts": "../../bin"
+    },
+    "mac": {
+      "category": "public.app-category.business",
+      "icon": "snowflake.png.icns",
+      "target": [
+        "pkg",
+        "dmg"
+      ]
+    }
   }
 }

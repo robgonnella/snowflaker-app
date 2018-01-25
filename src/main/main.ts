@@ -1,7 +1,7 @@
 import * as Electron from 'electron';
 import * as path from 'path';
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.DEVSERVER === 'true';
 // Module to control application life.
 const app: Electron.App = Electron.app
 // Module to create native browser window.
@@ -30,9 +30,9 @@ function createWindow (): void {
   // and load the index.html of the app.
   mainWindow.loadURL(pageUrl);
 
-  if (mainWindow) {
-    mainWindow.webContents.openDevTools({mode: 'detach'});
-  }
+  // if (mainWindow) {
+  //   mainWindow.webContents.openDevTools({mode: 'detach'});
+  // }
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
