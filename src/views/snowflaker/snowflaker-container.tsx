@@ -1,8 +1,10 @@
 import * as React from 'react';
 import Snowflaker from './snowflaker';
+import * as Electron from 'electron';
 import * as Redux from 'redux';
 import { connect } from 'react-redux';
 import { exec } from 'child_process';
+import * as path from 'path';
 import {
   setMode,
   resetApp,
@@ -11,6 +13,12 @@ import {
   setQaCsv } from '../../actions';
 import * as C from '../../constants';
 
+const appPath = Electron.remote.app.getAppPath();
+const appPathDir = path.dirname(appPath);
+const isDev = process.env.NODE_ENV === 'development';
+const execPath = isDev
+  ? '"./dist/bin/snowflaker"'
+  : `"${appPathDir}/snowflaker"`;
 
 export interface SnowflakerContainerProps {
   setMode: (mode: string) => void;
@@ -112,8 +120,9 @@ class SnowflakerContainer
     }
     if (option && arg1 && arg2 && !this.state.processing) {
       this.setState({processing: true})
+
       exec(
-        `"./dist/bin/snowflaker" ${option} ${arg1} ${arg2}`,
+        `${execPath} ${option} ${arg1} ${arg2}`,
         (err, stdout, stderr) => {
           if (err) {
             let error = stderr.split("\n");
@@ -168,7 +177,7 @@ class SnowflakerContainer
     if (arg1 && arg2 && option) {
       this.setState({processing: true});
       exec(
-        `"./dist/bin/snowflaker" ${option} ${arg1} ${arg2}`,
+        `${execPath} ${option} ${arg1} ${arg2}`,
         (err, stdout, stderr) => {
           if (err) {
             output = stderr.split("\n");

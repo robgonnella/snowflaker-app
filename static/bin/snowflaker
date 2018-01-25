@@ -6,30 +6,8 @@ import csv
 import re
 from optparse import OptionParser
 
-# RED = '\033[1;31m'
-# GREEN = '\033[1;32m'
-# BLUE = '\033[1;34m'
-# CYAN = '\033[1;36m'
-# RESET = '\033[1;0m'
-
-
 def die(msg):
-    # sys.exit('%s%s%s' %(RED, msg, RESET))
     sys.exit(msg)
-
-# def get_input(msg):
-#     return raw_input('%s%s%s' %(GREEN, msg, RESET)).strip()
-
-# def print_color(msg, color = GREEN):
-#     print('%s%s%s' %(color, msg, RESET))
-
-# def get_target_directory():
-#     print "\n"
-#     dir_name = get_input(
-#         'Drag and drop target directory to terminal and press enter: ')
-#     if (not os.path.isdir(dir_name)):
-#         die('Target must be a directory')
-#     return dir_name
 
 def validate_dir(dir):
     if (not os.path.isdir(dir)):
@@ -44,31 +22,6 @@ def validate_csv(csv):
         die('Snowflake map must be csv file')
     return csv
 
-
-# def get_csv_path():
-#     print "\n"
-#     csv_path = get_input('Drag and drop snowflake csv to terminal '
-#         'and press enter: ')
-#     if (not os.path.isfile(csv_path)):
-#         die('Snowflake map must be csv file')
-
-#     if (not csv_path.endswith('.csv')):
-#         die('Snowflake map must be csv file')
-
-#     return csv_path
-
-# def get_qa_csv():
-#     print "\n"
-#     csv_path = get_input('Drag and drop QA csv file to terminal and '
-#         'press enter: ')
-#     if (not os.path.isfile(csv_path)):
-#         die('QA file must be csv file')
-
-#     if (not csv_path.endswith('.csv')):
-#         die('QA file must be csv file')
-
-#     return csv_path
-
 def create_snowflake_map(path):
     with open(path, mode='r') as infile:
         reader = csv.reader(infile)
@@ -82,14 +35,13 @@ def convert(target_dir, snowflake_map):
         ext = file_parts[1]
         if filename in snowflake_map:
             new_name = snowflake_map[filename] + '.' + ext
-            success_msg = 'Snowflakerizing! %s -----> %s' %(file, new_name)
-            print(success_msg)
             os.rename(file, new_name)
         elif filename in snowflake_map.values():
             print(('Skipping %s: Already a snowflake' % file))
         else:
             skip_msg = ('Skipping %s: Doesn\'t map to a snowflake' % file)
             print(skip_msg)
+    print('Finished snowflakerizing files!')
 
 def undo(target_dir, snowflake_map):
     for file in os.listdir(target_dir):
@@ -100,11 +52,10 @@ def undo(target_dir, snowflake_map):
             for origin in snowflake_map:
                 if snowflake_map[origin] == filename:
                     new_name = origin + '.' + ext
-                    reset_msg = 'Resetting %s -----> %s' %(file, new_name)
-                    print(reset_msg)
                     os.rename(file, new_name)
         else:
             print(('Skipping %s: Not a snowflake' % file))
+    print('Files have been reset to their original names')
 
 def qa_map(qa_file, snowflake_map):
     new_file = [];
@@ -125,15 +76,12 @@ def qa_map(qa_file, snowflake_map):
         file_id = filename.split('_')[6]
         candidate = p_name.group(0) + '_' + file_id
         print '\n'
-        # print(('Candidate: %s' % candidate))
         if (candidate in snowflake_map.values()):
             for origin in snowflake_map:
                 if snowflake_map[origin] == candidate:
                     new_name = origin + '.' + ext
                     row.append(new_name)
                     new_file.append(row)
-                    # map_msg = 'Mapping %s ---> %s' %(filename, new_name)
-                    # print(map_msg)
                     break
         else:
             new_file.append(row)
@@ -159,17 +107,13 @@ def qa_wav(target_dir, snowflake_map):
         if file_pname:
             candidate = file_pname.group(0) + '_' + file_session_id
             print '\n'
-            print(('Checking candidate: %s' % candidate))
             if (candidate in snowflake_map.values()):
                 for origin in snowflake_map:
                     if snowflake_map[origin] == candidate:
-                        print('Match!')
                         new_name = origin + '_' + file
-                        convert_msg = (
-                            'Converting QA file %s ---> %s' %(file, new_name))
-                        print(convert_msg)
                         os.rename(file, new_name)
                         break
+    print('QA files have been prepended with origin name')
 
 def reverse_qa_wav(target_dir, snowflake_map):
     print "\n"
@@ -182,11 +126,8 @@ def reverse_qa_wav(target_dir, snowflake_map):
         parts = file.split('_')
         prefix = parts.pop(0)
         origin = '_'.join(parts)
-        prefix_msg = 'Removing prefix: %s' %prefix
-        print '\n'
-        print(prefix_msg)
-        print('Converted to ---> %s' % origin)
         os.rename(file, origin)
+    print('QA files restored to original names')
 
 
 
