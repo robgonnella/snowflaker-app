@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cp snowflaker /Applications/Snowflaker.app/Contents/Resources/
-
-exit $?
