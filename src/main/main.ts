@@ -30,12 +30,9 @@ function createWindow (): void {
   // and load the index.html of the app.
   mainWindow.loadURL(pageUrl);
 
-  // if (mainWindow) {
-  //   mainWindow.webContents.openDevTools({mode: 'detach'});
-  // }
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  if (mainWindow && isDev) {
+    mainWindow.webContents.openDevTools({mode: 'detach'});
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
