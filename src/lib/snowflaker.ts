@@ -45,7 +45,7 @@ export default class Snowflakerizer {
             const oldPath = targetDir + '/' + file;
             const newName = this.map[key] + ext;
             const newPath = targetDir + '/' + newName;
-            msg = `renaming ${file} -----> ${newName}`;
+            msg = `renaming ${file}\n      ------> ${newName}\n`;
             output.push(msg);
             fs.renameSync(oldPath, newPath);
           } else {
