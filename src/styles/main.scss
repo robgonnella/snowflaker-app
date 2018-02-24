@@ -9,6 +9,7 @@ body {
   overflow: hidden;
   cursor: default;
   -webkit-app-region: drag;
+  font-family: 'DIN OT', sans-serif;
 }
 
 #logo {
@@ -81,72 +82,70 @@ body {
 .title-container {
   text-align: center;
   height: 100%;
-  position: relative;
   margin: 25px auto;
   padding:25px;
 
-  .back-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
+  .top-button-container {
     height: 50px;
-    width: 200px;
-    border: 2px solid #5A6A7F;
-    background-color: #57617F;
-    border-radius: 4px;
-    font-size: 42px;
-    &:hover {
-      background-color: #5D6787;
+    .back-btn {
+      float: left;
+      box-sizing: border-box;
+      height: 50px;
+      width: 200px;
+      border: 2px solid #5A6A7F;
+      background-color: #57617F;
+      border-radius: 4px;
+      font-size: 36px;
+      &:hover {
+        background-color: #5D6787;
+      }
+      &:active {
+        background-color: #525C78;
+      }
     }
-    &:active {
-      background-color: #525C78;
+
+    .undo-btn {
+      display: inline-block;
+      opacity: 0;
+      box-sizing: border-box;
+      height: 50px;
+      width: 200px;
+      border: 2px solid #5A6A7F;
+      background-color: #57617F;
+      border-radius: 4px;
+      font-size: 24px;
+      padding: 10px 0;
+      transition: opacity 0.5s ease-in;
+      &.show {
+        opacity: 1;
+      }
+      &:hover {
+        background-color: #5D6787;
+      }
+      &:active {
+        background-color: #525C78;
+      }
+    }
+
+    .partial-reset-btn {
+      float: right;
+      box-sizing: border-box;
+      height: 50px;
+      width: 200px;
+      border: 2px solid #5A6A7F;
+      background-color: #57617F;
+      border-radius: 4px;
+      font-size: 24px;
+      padding: 10px 0;
+      &:hover {
+        background-color: #5D6787;
+      }
+      &:active {
+        background-color: #525C78;
+      }
     }
   }
 
-  .partial-reset-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    box-sizing: border-box;
-    height: 50px;
-    width: 200px;
-    border: 2px solid #5A6A7F;
-    background-color: #57617F;
-    border-radius: 4px;
-    font-size: 24px;
-    padding: 12.5px 0;
-    &:hover {
-      background-color: #5D6787;
-    }
-    &:active {
-      background-color: #525C78;
-    }
-  }
-
-  .undo-btn {
-    opacity: 0;
-    margin: 0 auto;
-    margin-top: 25px;
-    box-sizing: border-box;
-    height: 50px;
-    width: 200px;
-    border: 2px solid #5A6A7F;
-    background-color: #57617F;
-    border-radius: 4px;
-    font-size: 24px;
-    padding: 12.5px 0;
-    transition: opacity 0.5s ease-in;
-    &.show {
-      opacity: 1;
-    }
-    &:hover {
-      background-color: #5D6787;
-    }
-    &:active {
-      background-color: #525C78;
-    }
-  }
 
   .drag-n-drop-title {
     padding: 0;
@@ -159,10 +158,11 @@ body {
 }
 
 .output {
+  white-space: pre-line;
   height: 300px;
   outline: 2px solid #57617F;
   background-color: black;
-  color: green;
+  color: #3cba54;
   overflow-y: scroll;
   text-align: left;
   padding: 10px 17px;

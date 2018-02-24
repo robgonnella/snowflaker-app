@@ -33,7 +33,7 @@ function renderDragNDrop(props: SnowflakerProps) {
   let output: JSX.Element[] | '' = '';
   if (props.output.length) {
     output = props.output.map((line, idx) => {
-      return <div key={idx}> {line} </div>;
+      return <pre key={idx}> {line} </pre>;
     });
   }
   const firstTitle = props.appMode === C.QA_MAP_MODE
@@ -50,21 +50,23 @@ function renderDragNDrop(props: SnowflakerProps) {
   });
     return (
       <div className='title-container'>
-        <div
-          onClick={props.reset}
-          className='back-btn'>
-          ←
-        </div>
-        <div
-          onClick={props.partialReset}
-          className='partial-reset-btn'>
-          Reset
+        <div className='top-button-container'>
+          <div
+            onClick={props.reset}
+            className='back-btn'>
+            ←
+          </div>
+          { renderUndo(props) }
+          <div
+            onClick={props.partialReset}
+            className='partial-reset-btn'>
+            Reset
+          </div>
         </div>
         {titles}
         <div className='output'>
           {output}
         </div>
-        { renderUndo(props) }
       </div>
     );
 }
