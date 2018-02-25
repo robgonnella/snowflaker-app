@@ -1,5 +1,7 @@
 import * as Electron from 'electron';
 import * as path from 'path';
+import * as savedProjects from '../lib/saved-projects';
+savedProjects.initialize();
 
 const isDev = process.env.DEVSERVER === 'true';
 // Module to control application life.
