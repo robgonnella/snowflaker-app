@@ -13,13 +13,7 @@ import {
   setSnowflakeCsv,
   setQaCsv } from '../../actions';
 import * as C from '../../constants';
-
-const appPath = Electron.remote.app.getAppPath();
-const appPathDir = path.dirname(appPath);
-const isDev = process.env.NODE_ENV === 'development';
-const execPath = isDev
-  ? '"./dist/bin/snowflaker"'
-  : `"${appPathDir}/snowflaker"`;
+import * as savedProjects from '../../lib/saved-projects';
 
 export interface SnowflakerContainerProps {
   setMode: (mode: string) => void;
