@@ -1,11 +1,3 @@
 {
-  "name": "snowflaker-app",
-  "version": "1.0.0",
-  "description": "An app for giving unique names to files and storing mappings to original names",
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "csvtojson": "^1.1.9",
-    "json2csv": "^3.11.5"
-  }
+  "name": "snowflaker-app"
 }
